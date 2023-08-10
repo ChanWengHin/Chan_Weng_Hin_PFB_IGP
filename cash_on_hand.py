@@ -57,8 +57,8 @@ def coh_function():
         else:
             coh_surplus.append(coh_diff[day])
 
-    #create a file path to text file.
-    file_path= Path.cwd()/"project_group"/"summary_report.txt"
+    #create a file path to text file
+    file_path= Path.cwd()/"summary_report.txt"
 
     #if there are cash deficits, state all deficits and the days which they occur
     #also, state the highest deficit and the day which it occured
