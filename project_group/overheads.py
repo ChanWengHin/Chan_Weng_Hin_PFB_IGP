@@ -1,7 +1,7 @@
 #writing custom function called "overhead_function()"
 def overhead_function():
     """
-    - This function will return the highest overhead catagory and its weightage
+    - This function will state the highest overhead catagory and its weightage
     - This function does not require any parameters
     """
     #from pathlib modlule, import the Path class
@@ -40,8 +40,13 @@ def overhead_function():
     #extracting the highest percentage in "percentage_summary" and saving it to the "highest_percentage" variable
     highest_percentage= percentage_summary[0]
 
+    #create a file path to text file.
+    file_path= Path.cwd()/"project_group"/"summary_report.txt"
+
     #starting for loop
     for expenses in overheads:
         #look for the expense category that has the highest expense percentage stored in "highest_percentage" variable
         if expenses[1] == highest_percentage:
-            print(f'Highest overhead category is {expenses[0]} at {highest_percentage}%')
+            #open the file "summary_report.txt" for writing with UTF-8 encoding and write the message showing highest overhead category and its weightage
+            with file_path.open(mode= "w", encoding= "UTF-8") as file:
+                file.write(f'Highest overhead category is {expenses[0]} at {highest_percentage}%\n')
