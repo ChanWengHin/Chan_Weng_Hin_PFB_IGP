@@ -2,7 +2,7 @@
 def profitloss_function():
     """
     - If the business' net profit only increases everyday, the function will indicate this and state the highest net profit surplus and the day in which it occured
-    - If the busienss' net profit is fluctuating (not always increasing everyday), the function will state all the net profit deficits and the days in which they occur respectively. It will also state the highest net profit deficit and the day in wihch it occured
+    - If the busienss' net profit is fluctuating (not always increasing everyday), the function will state all the net profit deficits and the days in which they occur respectively. It will also state the highest net profit deficit and the day in which it occured
     - This function does not require any parameters
     """
     #from pathlib modlule, import the Path class
@@ -58,23 +58,34 @@ def profitloss_function():
         else:
             profit_surplus.append(net_profit_diff[day])
 
+    #create a file path to text file.
+    file_path= Path.cwd()/"project_group"/"summary_report.txt"
+
     #if there are profit deficits, state all deficits and the days which they occur
     #also, state the highest deficit and the day which it occured
     if len(profit_deficit) > 0:
         for day in net_profit_diff:
             if net_profit_diff[day] <= 0:
-                print(f'[PROFIT DEFICIT] DAY: {day}, AMOUNT: USD{abs(net_profit_diff[day])}')
+                #open the file "summary_report.txt" for appending with UTF-8 encoding and state all deficits and the days which they occur
+                with file_path.open(mode= "a", encoding= "UTF-8") as file:
+                    file.write(f'[PROFIT DEFICIT] DAY: {day}, AMOUNT: USD{abs(net_profit_diff[day])}\n')
         profit_deficit.sort()
         highest_deficit= profit_deficit[0]
         for day in net_profit_diff:
             if net_profit_diff[day] == highest_deficit:
-                print(f'[HIGHEST PROFIT DEFICIT] DAY: {day}, AMOUNT: USD{abs(net_profit_diff[day])}')
-    #if net profit always increases everyday, print the message saying so
+                #open the file "summary_report.txt" for appending with UTF-8 encoding and state the highest deficit and the day which it occured
+                with file_path.open(mode= "a", encoding= "UTF-8") as file:
+                    file.write(f'[HIGHEST PROFIT DEFICIT] DAY: {day}, AMOUNT: USD{abs(net_profit_diff[day])}')
+    #if net profit always increases everyday, state the message saying so
     #also, state the highest net profit surplus and the day which it occured
     else:
-        print(f'[NET PROFIT SURPLUS] NET PROFIT ON EACH DAY IS HIGHER THAN PREVIOUS DAY')
+        #open the file "summary_report.txt" for appending with UTF-8 encoding and state the message saying net profit always increases everyday
+        with file_path.open(mode= "a", encoding= "UTF-8") as file:
+            file.write(f'[NET PROFIT SURPLUS] NET PROFIT ON EACH DAY IS HIGHER THAN PREVIOUS DAY\n')
         profit_surplus.sort(reverse= True)
         highest_surplus= profit_surplus[0]
         for day in net_profit_diff:
             if net_profit_diff[day] == highest_surplus:
-                print(f'[HIGHEST NET PROFIT SURPLUS] DAY: {day}, AMOUNT: USD{net_profit_diff[day]}')
+                #open the file "summary_report.txt" for appending with UTF-8 encoding and state the highest net profit surplus and the day which it occured
+                with file_path.open(mode= "a", encoding= "UTF-8") as file:
+                    file.write(f'[HIGHEST NET PROFIT SURPLUS] DAY: {day}, AMOUNT: USD{net_profit_diff[day]}')
