@@ -2,7 +2,7 @@
 def coh_function():
     """
     - If the business' cash only increases everyday, the function will indicate this and state the highest cash surplus and the day in which it occured
-    - If the busienss' cash is fluctuating (not always increasing everyday), the function will state all the cash deficits and the days in which they occur respectively. It will also state the highest cash deficit and the day in wihch it occured
+    - If the busienss' cash is fluctuating (not always increasing everyday), the function will state all the cash deficits and the days in which they occur respectively. It will also state the highest cash deficit and the day in which it occured
     - This function does not require any parameters
     """
     #from pathlib modlule, import the Path class
@@ -57,23 +57,35 @@ def coh_function():
         else:
             coh_surplus.append(coh_diff[day])
 
+    #create a file path to text file.
+    file_path= Path.cwd()/"project_group"/"summary_report.txt"
+
     #if there are cash deficits, state all deficits and the days which they occur
     #also, state the highest deficit and the day which it occured
     if len(coh_deficit) > 0:
         for day in coh_diff:
             if coh_diff[day] <= 0:
-                print(f'[CASH DEFICIT] DAY: {day}, AMOUNT: USD{abs(coh_diff[day])}')
+                #open the file "summary_report.txt" for appending with UTF-8 encoding and append the message stating all deficits and the days which they occur
+                with file_path.open(mode= "a", encoding= "UTF-8") as file:
+                    file.write(f'[CASH DEFICIT] DAY: {day}, AMOUNT: USD{abs(coh_diff[day])}\n')
         coh_deficit.sort()
         highest_deficit= coh_deficit[0]
         for day in coh_diff:
             if coh_diff[day] == highest_deficit:
-                print(f'[HIGHEST CASH DEFICIT] DAY: {day}, AMOUNT: USD{abs(coh_diff[day])}')
-    #if cash on hand always increases everyday, print the message saying so
+                #open the file "summary_report.txt" for appending with UTF-8 encoding and state the highest deficit and the day which it occured
+                with file_path.open(mode= "a", encoding= "UTF-8") as file:
+                    file.write(f'[HIGHEST CASH DEFICIT] DAY: {day}, AMOUNT: USD{abs(coh_diff[day])}\n')
+
+    #if cash on hand always increases everyday, write the message saying so
     #also, state the highest cash surplus and the day which it occured
     else:
-        print(f'[CASH SURPLUS] CASH ON EACH DAY IS HIGHER THAN THE PREVIOUS DAY')
+        #open the file "summary_report.txt" for appending with UTF-8 encoding and write the message saying cash on hand always increases everyday
+        with file_path.open(mode= "a", encoding= "UTF-8") as file:
+            file.write(f'[CASH SURPLUS] CASH ON EACH DAY IS HIGHER THAN THE PREVIOUS DAY\n')
         coh_surplus.sort(reverse= True)
         highest_surplus= coh_surplus[0]
         for day in coh_diff:
             if coh_diff[day] == highest_surplus:
-                print(f'[HIGHEST CASH SURPLUS] DAY: {day}, AMOUNT: USD{coh_diff[day]}')
+                #open the file "summary_report.txt" for appending with UTF-8 encoding and state the highest cash surplus and the day which it occured
+                with file_path.open(mode= "a", encoding= "UTF-8") as file:
+                    file.write(f'[HIGHEST CASH SURPLUS] DAY: {day}, AMOUNT: USD{coh_diff[day]}\n')
