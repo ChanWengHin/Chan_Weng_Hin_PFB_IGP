@@ -58,8 +58,8 @@ def profitloss_function():
         else:
             profit_surplus.append(net_profit_diff[day])
 
-    #create a file path to text file.
-    file_path= Path.cwd()/"project_group"/"summary_report.txt"
+    #create a file path to text file
+    file_path= Path.cwd()/"summary_report.txt"
 
     #if there are profit deficits, state all deficits and the days which they occur
     #also, state the highest deficit and the day which it occured
