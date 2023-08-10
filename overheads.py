@@ -40,8 +40,8 @@ def overhead_function():
     #extracting the highest percentage in "percentage_summary" and saving it to the "highest_percentage" variable
     highest_percentage= percentage_summary[0]
 
-    #create a file path to text file.
-    file_path= Path.cwd()/"project_group"/"summary_report.txt"
+    #create a file path to text file
+    file_path= Path.cwd()/"summary_report.txt"
 
     #starting for loop
     for expenses in overheads:
